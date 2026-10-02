@@ -5,7 +5,7 @@
    Backend remains unchanged.
 ========================================================= */
 
-const API_URL = "http://127.0.0.1:8000/analyze";
+const API_URL = "https://ai-cro-agent-1xck.onrender.com/analyze";
 
 const urlInput = document.getElementById("urlInput");
 const analyzeBtn = document.getElementById("analyzeBtn");
