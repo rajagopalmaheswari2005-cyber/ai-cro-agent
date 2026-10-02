@@ -15,17 +15,13 @@ The user enters a website URL and the system analyzes the page content and gener
 ## Project Structure
 ``` code
 ai-cro-agent/
-├── frontend/
-│   ├── index.html
-│   ├── report.html
-│   ├── report.js
-│   ├── script.js
-│   └── style.css
-│
-├── backend/
-│   ├── main.py
-│   ├── scraper.py
-│   ├── ai_analyzer.py
-│   └── requirements.txt
-│
-└── README.md
+├── README.md
+├── index.html
+├── report.html
+├── style.css
+├── script.js
+├── report.js
+├── main.py
+├── scraper.py
+├── ai_analyzer.py
+└── requirements.txt
