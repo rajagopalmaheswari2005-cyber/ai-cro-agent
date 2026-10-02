@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="AI-powered Landing Page CRO Agent. Analyze your website and discover conversion optimization opportunities."
+    >
+
+    <title>AI CRO Agent — Landing Page Intelligence</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="background-effects" aria-hidden="true">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="#" class="brand" aria-label="AI CRO Agent Home">
+                <span class="brand-mark">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M12 3L14.2 9.8L21 12L14.2 14.2L12 21L9.8 14.2L3 12L9.8 9.8L12 3Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </span>
+
+                <span class="brand-text">
+                    <strong>AI CRO</strong>
+                    <span>Agent</span>
+                </span>
+            </a>
+
+            <div class="nav-right">
+
+                <div class="engine-status">
+                    <span class="status-dot"></span>
+                    <span>AI Engine Online</span>
+                </div>
+
+                <span class="nav-divider"></span>
+
+                <span class="nav-label">Conversion Intelligence</span>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- =========================
+             HERO
+        ========================== -->
+        <section class="hero-section">
+
+            <div class="hero-container">
+
+                <div class="hero-badge">
+                    <span class="sparkle-icon">✦</span>
+                    AI-powered conversion intelligence
+                </div>
+
+                <h1>
+                    Turn Any Landing Page Into
+                    <span class="gradient-text">a Conversion Machine.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Analyze your landing page with AI and uncover the
+                    conversion barriers, messaging problems, UX friction
+                    and opportunities holding your website back.
+                </p>
+
+                <!-- Analyzer -->
+                <div class="analyzer-card">
+
+                    <div class="input-wrapper">
+
+                        <div class="input-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M10.5 13.5L13.5 10.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                                <path
+                                    d="M8.5 16.5L7 18C5.343 19.657 2.657 19.657 1 18C-.657 16.343-.657 13.657 1 12L5 8C6.657 6.343 9.343 6.343 11 8"
+                                    transform="translate(2 0)"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                                <path
+                                    d="M15.5 7.5L17 6C18.657 4.343 21.343 4.343 23 6C24.657 7.657 24.657 10.343 23 12L19 16C17.343 17.657 14.657 17.657 13 16"
+                                    transform="translate(-2 0)"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </div>
+
+                        <input
+                            type="url"
+                            id="urlInput"
+                            placeholder="Enter your landing page URL..."
+                            autocomplete="url"
+                            spellcheck="false"
+                            aria-label="Website URL"
+                        />
+
+                    </div>
+
+                    <button
+                        id="analyzeBtn"
+                        class="analyze-btn"
+                        type="button"
+                    >
+                        <span class="btn-content">
+                            Analyze Page
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M5 12H19"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                />
+                                <path
+                                    d="M13 6L19 12L13 18"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+
+                        <span class="btn-loader"></span>
+                    </button>
+
+                </div>
+
+                <!-- Hero feature indicators -->
+                <div class="hero-features">
+
+                    <div class="hero-feature">
+                        <span class="feature-check">✓</span>
+                        AI Analysis
+                    </div>
+
+                    <div class="hero-feature">
+                        <span class="feature-check">✓</span>
+                        CRO Score
+                    </div>
+
+                    <div class="hero-feature">
+                        <span class="feature-check">✓</span>
+                        Actionable Insights
+                    </div>
+
+                </div>
+
+                <!-- Error -->
+                <div
+                    id="errorMessage"
+                    class="error-message"
+                    role="alert"
+                    aria-live="polite"
+                >
+                    <span class="error-icon">!</span>
+                    <span id="errorText">Something went wrong.</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             LOADING STATE
+        ========================== -->
+        <section id="loadingSection" class="loading-section">
+
+            <div class="loading-container">
+
+                <div class="ai-loader">
+                    <div class="loader-ring ring-one"></div>
+                    <div class="loader-ring ring-two"></div>
+                    <div class="loader-core">
+                        <span>AI</span>
+                    </div>
+                </div>
+
+                <h2>Analyzing your landing page</h2>
+
+                <p class="loading-description">
+                    Our AI is examining your page for conversion opportunities.
+                </p>
+
+                <div class="analysis-steps">
+
+                    <div class="analysis-step active" data-step="1">
+                        <span class="step-icon">
+                            <span class="step-spinner"></span>
+                        </span>
+                        <span>Fetching webpage...</span>
+                    </div>
+
+                    <div class="analysis-step" data-step="2">
+                        <span class="step-icon">
+                            <span class="step-number">2</span>
+                        </span>
+                        <span>Analyzing conversion signals...</span>
+                    </div>
+
+                    <div class="analysis-step" data-step="3">
+                        <span class="step-icon">
+                            <span class="step-number">3</span>
+                        </span>
+                        <span>Generating CRO insights...</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RESULTS
+        ========================== -->
+        <section id="resultsSection" class="results-section">
+
+            <div class="results-container">
+
+                <!-- Results header -->
+                <div class="results-header">
+
+                    <div>
+                        <div class="section-eyebrow">
+                            <span></span>
+                            AI ANALYSIS COMPLETE
+                        </div>
+
+                        <h2>Your Conversion Intelligence Report</h2>
+
+                        <p>
+                            Here's what our AI found across your landing page.
+                        </p>
+                    </div>
+
+                    <button
+                        id="newAnalysisBtn"
+                        class="secondary-btn"
+                        type="button"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M20 11A8.1 8.1 0 0 0 5.3 6.5L3 9"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M3 4V9H8"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M4 13A8.1 8.1 0 0 0 18.7 17.5L21 15"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M21 20V15H16"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                        New Analysis
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+                     SCORE + SUMMARY
+                ========================== -->
+                <div class="score-overview">
+
+                    <div class="score-card">
+
+                        <div class="score-card-top">
+                            <span class="card-label">OVERALL CRO SCORE</span>
+
+                            <span id="scoreStatusBadge" class="score-status">
+                                Analyzing
+                            </span>
+                        </div>
+
+                        <div class="score-content">
+
+                            <div class="score-circle">
+
+                                <svg
+                                    class="score-svg"
+                                    viewBox="0 0 220 220"
+                                >
+                                    <circle
+                                        class="score-track"
+                                        cx="110"
+                                        cy="110"
+                                        r="92"
+                                    ></circle>
+
+                                    <circle
+                                        id="scoreProgress"
+                                        class="score-progress"
+                                        cx="110"
+                                        cy="110"
+                                        r="92"
+                                    ></circle>
+                                </svg>
+
+                                <div class="score-value">
+                                    <strong id="scoreNumber">0</strong>
+                                    <span>/ 100</span>
+                                </div>
+
+                            </div>
+
+                            <div class="score-copy">
+
+                                <h3 id="scoreTitle">
+                                    Your page has room to grow.
+                                </h3>
+
+                                <p id="scoreInterpretation">
+                                    Your AI-generated CRO assessment will appear
+                                    here after analysis.
+                                </p>
+
+                                <div class="score-meta">
+                                    <span class="meta-dot"></span>
+                                    AI-generated assessment
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-summary-card">
+
+                        <div class="quick-card-header">
+                            <div class="mini-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M4 19V5"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                    <path
+                                        d="M4 17L9 12L13 15L20 7"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span>Conversion Snapshot</span>
+                        </div>
+
+                        <div class="snapshot-list">
+
+                            <div class="snapshot-item">
+                                <span>Page analyzed</span>
+                                <strong id="analyzedUrl">—</strong>
+                            </div>
+
+                            <div class="snapshot-item">
+                                <span>Analysis engine</span>
+                                <strong>AI CRO Engine</strong>
+                            </div>
+
+                            <div class="snapshot-item">
+                                <span>Signals reviewed</span>
+                                <strong>7 categories</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     INSIGHTS
+                ========================== -->
+                <div class="insights-header">
+
+                    <div>
+                        <div class="section-eyebrow">
+                            <span></span>
+                            CONVERSION SIGNALS
+                        </div>
+
+                        <h2>AI Insights</h2>
+
+                        <p>
+                            Detailed analysis of the areas that influence
+                            conversion performance.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="insights-grid">
+
+                    <!-- Hero -->
+                    <article class="insight-card" data-card="hero">
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon hero-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M4 17L10 11L14 15L20 7"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M15 7H20V12"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span class="insight-badge">Hero Section</span>
+
+                            <span class="status-badge" id="heroStatus">
+                                —
+                            </span>
+
+                        </div>
+
+                        <h3>Hero Section</h3>
+
+                        <p id="heroAnalysis" class="insight-text">
+                            Waiting for analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- CTA -->
+                    <article class="insight-card" data-card="cta">
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon cta-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 12H19"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                    <path
+                                        d="M13 6L19 12L13 18"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span class="insight-badge">Action</span>
+
+                            <span class="status-badge" id="ctaStatus">—</span>
+
+                        </div>
+
+                        <h3>CTA Quality</h3>
+
+                        <p id="ctaAnalysis" class="insight-text">
+                            Waiting for analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- Trust -->
+                    <article class="insight-card" data-card="trust">
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon trust-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 3L20 6V11C20 16.2 16.6 20 12 21C7.4 20 4 16.2 4 11V6L12 3Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M8 12L10.5 14.5L16 9"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span class="insight-badge">Confidence</span>
+
+                            <span class="status-badge" id="trustStatus">—</span>
+
+                        </div>
+
+                        <h3>Trust Signals</h3>
+
+                        <p id="trustAnalysis" class="insight-text">
+                            Waiting for analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- Product -->
+                    <article class="insight-card" data-card="product">
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon product-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M4 7L12 3L20 7V17L12 21L4 17V7Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M4 7L12 11L20 7"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M12 11V21"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span class="insight-badge">Product</span>
+
+                            <span class="status-badge" id="productStatus">—</span>
+
+                        </div>
+
+                        <h3>Product Page Issues</h3>
+
+                        <p id="productAnalysis" class="insight-text">
+                            Waiting for analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- Mobile -->
+                    <article class="insight-card" data-card="mobile">
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon mobile-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <rect
+                                        x="7"
+                                        y="2.5"
+                                        width="10"
+                                        height="19"
+                                        rx="2"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+                                    <path
+                                        d="M10 18.5H14"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span class="insight-badge">UX</span>
+
+                            <span class="status-badge" id="mobileStatus">—</span>
+
+                        </div>
+
+                        <h3>Mobile UX</h3>
+
+                        <p id="mobileAnalysis" class="insight-text">
+                            Waiting for analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- Copy -->
+                    <article class="insight-card" data-card="copy">
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon copy-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M5 4H19V20H5V4Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M8 8H16"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                    <path
+                                        d="M8 12H16"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                    <path
+                                        d="M8 16H13"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span class="insight-badge">Messaging</span>
+
+                            <span class="status-badge" id="copyStatus">—</span>
+
+                        </div>
+
+                        <h3>Copy &amp; Message</h3>
+
+                        <p id="copyAnalysis" class="insight-text">
+                            Waiting for analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- Friction -->
+                    <article class="insight-card friction-card" data-card="friction">
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon friction-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 3L21 19H3L12 3Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M12 9V13"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+                                    <circle
+                                        cx="12"
+                                        cy="16.5"
+                                        r="0.8"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                            </div>
+
+                            <span class="insight-badge">Risk</span>
+
+                            <span class="status-badge" id="frictionStatus">
+                                —
+                            </span>
+
+                        </div>
+
+                        <h3>Friction Points</h3>
+
+                        <p id="frictionAnalysis" class="insight-text">
+                            Waiting for analysis...
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <!-- =========================
+                     RECOMMENDATIONS
+                ========================== -->
+                <section class="recommendations-section">
+
+                    <div class="recommendations-header">
+
+                        <div>
+                            <div class="section-eyebrow">
+                                <span></span>
+                                AI ACTION PLAN
+                            </div>
+
+                            <h2>Recommended Improvements</h2>
+
+                            <p>
+                                Prioritized actions you can take to improve
+                                your landing page conversion experience.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="recommendationsList"
+                        class="recommendations-list"
+                    >
+                        <!-- Generated dynamically -->
+                    </div>
+
+                </section>
+
+
+                <!-- Footer result -->
+                <div class="results-footer">
+
+                    <div class="footer-ai-mark">
+                        <span>✦</span>
+                        Powered by AI CRO Intelligence
+                    </div>
+
+                    <button
+                        id="backToTopBtn"
+                        class="back-top-btn"
+                        type="button"
+                    >
+                        Back to top ↑
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <span>AI CRO Agent</span>
+
+            <span class="footer-separator">•</span>
+
+            <span>Landing Page Conversion Intelligence</span>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

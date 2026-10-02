@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AI CRO Agent conversion intelligence report."
+    >
+
+    <title>
+        CRO Analysis Report — AI CRO Agent
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Reuse existing design system -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <style>
+
+        /*
+         * Report page uses the existing
+         * CRO dashboard styles.
+         */
+
+        body {
+            min-height: 100vh;
+        }
+
+        .report-page {
+            position: relative;
+            z-index: 3;
+        }
+
+        .report-topbar {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 20px 0 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .report-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 9px 13px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: rgba(255,255,255,0.025);
+
+            color: #aeb6c7;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 180ms ease,
+                border-color 180ms ease;
+        }
+
+        .report-back:hover {
+            background: rgba(139,92,246,0.08);
+            border-color: rgba(139,92,246,0.2);
+        }
+
+        .report-page .results-section {
+            display: block;
+            padding-top: 32px;
+        }
+
+        .report-page .results-header {
+            margin-bottom: 30px;
+        }
+
+        .report-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #738095;
+
+            font-size: 11px;
+        }
+
+        .report-status-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #34d399;
+
+            box-shadow:
+                0 0 12px rgba(52,211,153,0.5);
+        }
+
+        @media (max-width: 680px) {
+
+            .report-topbar {
+                width: calc(100% - 28px);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Background -->
+
+    <div
+        class="background-effects"
+        aria-hidden="true"
+    >
+
+        <div class="glow glow-one"></div>
+
+        <div class="glow glow-two"></div>
+
+        <div class="grid-overlay"></div>
+
+    </div>
+
+
+    <div class="report-page">
+
+
+        <!-- TOP BAR -->
+
+        <div class="report-topbar">
+
+            <button
+                id="backHomeBtn"
+                class="report-back"
+                type="button"
+            >
+
+                ← New Analysis
+
+            </button>
+
+
+            <div class="report-status">
+
+                <span
+                    class="report-status-dot"
+                ></span>
+
+                AI Analysis Complete
+
+            </div>
+
+        </div>
+
+
+        <!-- REPORT -->
+
+        <section
+            id="resultsSection"
+            class="results-section active"
+        >
+
+            <div class="results-container">
+
+
+                <!-- HEADER -->
+
+                <div class="results-header">
+
+                    <div>
+
+                        <div class="section-eyebrow">
+
+                            <span></span>
+
+                            CONVERSION INTELLIGENCE
+
+                        </div>
+
+
+                        <h2>
+                            Your CRO Analysis Report
+                        </h2>
+
+
+                        <p>
+                            AI-generated insights and
+                            actionable conversion improvements.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="analyzed-url"
+                        id="reportUrl"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <!-- SCORE -->
+
+                <div class="score-overview">
+
+
+                    <div class="score-card">
+
+                        <div class="score-card-top">
+
+                            <span class="card-label">
+                                OVERALL CRO SCORE
+                            </span>
+
+
+                            <span
+                                id="scoreStatusBadge"
+                                class="score-status"
+                            >
+                                Analyzing
+                            </span>
+
+                        </div>
+
+
+                        <div class="score-content">
+
+
+                            <div class="score-circle">
+
+                                <svg
+                                    class="score-svg"
+                                    viewBox="0 0 220 220"
+                                >
+
+                                    <circle
+                                        class="score-track"
+                                        cx="110"
+                                        cy="110"
+                                        r="92"
+                                    ></circle>
+
+
+                                    <circle
+                                        id="scoreProgress"
+                                        class="score-progress"
+                                        cx="110"
+                                        cy="110"
+                                        r="92"
+                                    ></circle>
+
+                                </svg>
+
+
+                                <div class="score-value">
+
+                                    <strong
+                                        id="scoreNumber"
+                                    >
+                                        0
+                                    </strong>
+
+                                    <span>
+                                        / 100
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="score-copy">
+
+                                <h3
+                                    id="scoreTitle"
+                                >
+                                    Analyzing your page...
+                                </h3>
+
+
+                                <p
+                                    id="scoreInterpretation"
+                                >
+                                    AI is preparing your CRO
+                                    assessment.
+                                </p>
+
+
+                                <div class="score-meta">
+
+                                    <span class="meta-dot"></span>
+
+                                    AI-generated assessment
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SNAPSHOT -->
+
+                    <div class="quick-summary-card">
+
+                        <div class="quick-card-header">
+
+                            <div class="mini-icon">
+                                ✦
+                            </div>
+
+                            <span>
+                                Conversion Snapshot
+                            </span>
+
+                        </div>
+
+
+                        <div class="snapshot-list">
+
+
+                            <div class="snapshot-item">
+
+                                <span>
+                                    Page analyzed
+                                </span>
+
+                                <strong
+                                    id="analyzedUrl"
+                                >
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="snapshot-item">
+
+                                <span>
+                                    Analysis engine
+                                </span>
+
+                                <strong>
+                                    AI CRO Engine
+                                </strong>
+
+                            </div>
+
+
+                            <div class="snapshot-item">
+
+                                <span>
+                                    Signals reviewed
+                                </span>
+
+                                <strong>
+                                    7 categories
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- INSIGHTS -->
+
+                <div class="insights-header">
+
+                    <div>
+
+                        <div class="section-eyebrow">
+
+                            <span></span>
+
+                            CONVERSION SIGNALS
+
+                        </div>
+
+
+                        <h2>
+                            AI Insights
+                        </h2>
+
+
+                        <p>
+                            Click any insight to understand
+                            what the AI found and how to improve it.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="insights-grid"
+                    id="insightsGrid"
+                >
+
+
+                    <!-- HERO -->
+
+                    <article
+                        class="insight-card"
+                        data-card="hero"
+                    >
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon hero-icon">
+                                ✦
+                            </div>
+
+                            <span class="insight-badge">
+                                Hero Section
+                            </span>
+
+                            <span
+                                class="status-badge"
+                                id="heroStatus"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Hero Section
+                        </h3>
+
+
+                        <p
+                            id="heroAnalysis"
+                            class="insight-text"
+                        >
+                            Loading analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- CTA -->
+
+                    <article
+                        class="insight-card"
+                        data-card="cta"
+                    >
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon cta-icon">
+                                →
+                            </div>
+
+                            <span class="insight-badge">
+                                Action
+                            </span>
+
+                            <span
+                                class="status-badge"
+                                id="ctaStatus"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            CTA Quality
+                        </h3>
+
+
+                        <p
+                            id="ctaAnalysis"
+                            class="insight-text"
+                        >
+                            Loading analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- TRUST -->
+
+                    <article
+                        class="insight-card"
+                        data-card="trust"
+                    >
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon trust-icon">
+                                ✓
+                            </div>
+
+                            <span class="insight-badge">
+                                Confidence
+                            </span>
+
+                            <span
+                                class="status-badge"
+                                id="trustStatus"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Trust Signals
+                        </h3>
+
+
+                        <p
+                            id="trustAnalysis"
+                            class="insight-text"
+                        >
+                            Loading analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- PRODUCT -->
+
+                    <article
+                        class="insight-card"
+                        data-card="product"
+                    >
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon product-icon">
+                                ◈
+                            </div>
+
+                            <span class="insight-badge">
+                                Product
+                            </span>
+
+                            <span
+                                class="status-badge"
+                                id="productStatus"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Product Page Issues
+                        </h3>
+
+
+                        <p
+                            id="productAnalysis"
+                            class="insight-text"
+                        >
+                            Loading analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- MOBILE -->
+
+                    <article
+                        class="insight-card"
+                        data-card="mobile"
+                    >
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon mobile-icon">
+                                ◫
+                            </div>
+
+                            <span class="insight-badge">
+                                UX
+                            </span>
+
+                            <span
+                                class="status-badge"
+                                id="mobileStatus"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Mobile UX
+                        </h3>
+
+
+                        <p
+                            id="mobileAnalysis"
+                            class="insight-text"
+                        >
+                            Loading analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- COPY -->
+
+                    <article
+                        class="insight-card"
+                        data-card="copy"
+                    >
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon copy-icon">
+                                Aa
+                            </div>
+
+                            <span class="insight-badge">
+                                Messaging
+                            </span>
+
+                            <span
+                                class="status-badge"
+                                id="copyStatus"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Copy &amp; Message
+                        </h3>
+
+
+                        <p
+                            id="copyAnalysis"
+                            class="insight-text"
+                        >
+                            Loading analysis...
+                        </p>
+
+                    </article>
+
+
+                    <!-- FRICTION -->
+
+                    <article
+                        class="insight-card friction-card"
+                        data-card="friction"
+                    >
+
+                        <div class="insight-card-top">
+
+                            <div class="insight-icon friction-icon">
+                                !
+                            </div>
+
+                            <span class="insight-badge">
+                                Risk
+                            </span>
+
+                            <span
+                                class="status-badge"
+                                id="frictionStatus"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Friction Points
+                        </h3>
+
+
+                        <p
+                            id="frictionAnalysis"
+                            class="insight-text"
+                        >
+                            Loading analysis...
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+
+                <!-- RECOMMENDATIONS -->
+
+                <section
+                    class="recommendations-section"
+                >
+
+                    <div
+                        class="recommendations-header"
+                    >
+
+                        <div>
+
+                            <div class="section-eyebrow">
+
+                                <span></span>
+
+                                AI ACTION PLAN
+
+                            </div>
+
+
+                            <h2>
+                                Recommended Improvements
+                            </h2>
+
+
+                            <p>
+                                Click a recommendation to
+                                see the detailed action plan.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="recommendationsList"
+                        class="recommendations-list"
+                    >
+                    </div>
+
+                </section>
+
+
+                <!-- FOOTER -->
+
+                <div class="results-footer">
+
+                    <div class="footer-ai-mark">
+
+                        <span>✦</span>
+
+                        Powered by AI CRO Intelligence
+
+                    </div>
+
+
+                    <button
+                        id="backToTopBtn"
+                        class="back-top-btn"
+                        type="button"
+                    >
+                        Back to top ↑
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- DETAIL MODAL -->
+
+    <div
+        id="detailModal"
+        class="detail-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+    >
+
+        <div class="detail-modal-card">
+
+            <button
+                id="detailClose"
+                class="detail-close"
+                type="button"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <div
+                id="detailEyebrow"
+                class="detail-eyebrow"
+            >
+                AI INSIGHT
+            </div>
+
+
+            <h2
+                id="detailTitle"
+            >
+                Insight Details
+            </h2>
+
+
+            <span
+                id="detailStatus"
+                class="detail-status"
+            >
+                Review
+            </span>
+
+
+            <div class="detail-block">
+
+                <h3>
+                    What the AI found
+                </h3>
+
+                <p
+                    id="detailAnalysis"
+                >
+                    —
+                </p>
+
+            </div>
+
+
+            <div class="detail-block">
+
+                <h3>
+                    Why this matters
+                </h3>
+
+                <p
+                    id="detailWhy"
+                >
+                    —
+                </p>
+
+            </div>
+
+
+            <div class="detail-block detail-example">
+
+                <h3>
+                    Example
+                </h3>
+
+                <p
+                    id="detailExample"
+                >
+                    —
+                </p>
+
+            </div>
+
+
+            <div class="detail-block detail-action">
+
+                <h3>
+                    Suggested action
+                </h3>
+
+                <p
+                    id="detailAction"
+                >
+                    —
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="report.js"></script>
+
+</body>
+
+</html>
